@@ -1,7 +1,15 @@
-import { defer } from 'react-router'
-import { CurrentUserState } from '@/types/store'
-import store from '@/store'
-import { currentUserActions } from '@/store/currentUser'
+/**
+ * External dependencies
+ */
+import { defer } from 'react-router';
+import { isEmpty } from 'lodash';
+/**
+ * Internal dependencies
+ */
+import { CurrentUserState } from '@/types/store';
+import { currentUserActions } from '@/store/currentUser';
+import Cookies from 'js-cookie';
+import store from '@/store';
 
 const dummyUser: CurrentUserState = {
     id: '1',
@@ -13,21 +21,32 @@ const dummyUser: CurrentUserState = {
     imageId: '',
     online: true,
     username: 'johndoe',
-}
+};
 
 const validateCurrentUser = async () => {
-    const fetch = (): Promise<CurrentUserState | NonNullable<unknown>> => new Promise((resolve, reject) => {
-        const hasUser = store.getState().currentUser;
-        // resolve({})
-        if( hasUser.username ) return resolve(hasUser);
+    const fetch = (): Promise<CurrentUserState | NonNullable<unknown>> =>
+        new Promise((resolve, reject) => {
+            const token = Cookies.get('admin_access_token');
 
-        setTimeout(() => {
-            store.dispatch( currentUserActions.setUser( dummyUser ) )
-            resolve(dummyUser)
-        }, 2000)
-    })
-  
-    return defer({ currentUser: fetch() })
-}
+            // when user is logged out
+            if (isEmpty(token)) {
+                return resolve({});
+            }
 
-export default validateCurrentUser
+            // when user is already logged in
+            const hasUser = store.getState().currentUser;
+            if (!isEmpty(hasUser)) {
+                return resolve(hasUser);
+            }
+
+            // verify user token
+            setTimeout(() => {
+                store.dispatch(currentUserActions.setUser(dummyUser));
+                resolve(dummyUser);
+            }, 2000);
+        });
+
+    return defer({ currentUser: fetch() });
+};
+
+export default validateCurrentUser;
