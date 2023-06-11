@@ -1,5 +1,10 @@
-import { Outlet } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
+/**
+ * External dependencies
+ */
+import { Outlet, NavLink } from 'react-router-dom';
+/**
+ * Internal dependencies
+ */
 import Web from '@/icons/web';
 import HomeIcon from '@/icons/home';
 import StarIcon from '@/icons/star';
@@ -12,7 +17,7 @@ export default function PublicLayout() {
                 <p className="text-base font-light opacity-70 pb-2">
                     Good Afternoon
                 </p>
-                <div className="flex justify-between items-center gap-x-6">
+                <div className="flex justify-between items-end gap-x-6">
                     <p className="font-semibold text-3xl md:text-4xl">
                         Big Apple Barber Shop
                     </p>

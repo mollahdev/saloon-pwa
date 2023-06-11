@@ -11,13 +11,14 @@ import {
  * Internal dependencies
  */
 import AdminLayout from '@/layouts/admin-layout';
+import PublicLayout from '@/layouts/public-layout';
 import Home from '@/pages/public/home';
 import Overview from '@/pages/admin/overview';
 import Login from '@/pages/public/login';
-import PublicLayout from '@/layouts/public-layout';
-import validateCurrentUser from '@/auth/validateCurrentUser';
 import Service from '@/pages/admin/service';
+import loginAction from '@/pages/public/login/action';
 import ReviewsPage from '@/pages/public/reviews';
+import validateCurrentUser from '@/auth/validateCurrentUser';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -28,6 +29,7 @@ const router = createBrowserRouter(
                     path="login"
                     element={<Login />}
                     loader={validateCurrentUser}
+                    action={loginAction}
                 />
                 <Route path="reviews" element={<ReviewsPage />} />
             </Route>

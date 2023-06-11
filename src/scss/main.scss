@@ -2,21 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-    .home-menu-link {
-        @apply flex flex-col justify-between rounded-3xl p-5 transition duration-300 ease-in-out;
-    }
-}
-
 body {
     @apply bg-dark-bg;
 }
 
 .bottom-nav {
     @apply fixed bottom-0 left-0 sm:rounded-full p-1 mx-auto sm:bottom-[30px] sm:left-1/2 transform sm:-translate-x-1/2;
+    box-shadow: 0 -10px 23px #00000054;
 
     @media (max-width: 575px) {
-        box-shadow: 0 -10px 23px #00000054;
         @apply w-full max-w-full;
     }
 

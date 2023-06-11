@@ -7,3 +7,8 @@ export type CurrentUserState = Omit<
 export type Core = {
     isAppReady: boolean;
 };
+
+export type LoginFormData = {
+    email?: string;
+    password?: string;
+};
