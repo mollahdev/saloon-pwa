@@ -1,4 +1,5 @@
 import { isEmpty } from 'lodash';
+import { doAction } from '@mollahdev/hooks-js';
 
 type RequestData = {
     formData: () => FormData;
@@ -23,11 +24,20 @@ export default async function loginAction({ request }) {
 
     // if (isEmpty(email)) {
     // }
-    error['email'] = 'Email is required';
-    error['password'] = 'Password is required';
+    // error['email'] = 'Email is required';
+    // error['password'] = 'Password is required';
 
     // if (isEmpty(password)) {
     // }
+
+    doAction('notification', {
+        title: "Wonderful!",
+        message: "teodosii@react-notifications-component",
+        type: "danger",
+        container: 'top-right',    
+    })
+
+    error['notification'] = 'Email or password is incorrect';
 
     const response = await fetch();
     console.log(response);

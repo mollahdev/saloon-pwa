@@ -12,3 +12,7 @@ export type LoginFormData = {
     email?: string;
     password?: string;
 };
+
+export type CoreState = {
+    isOnline: boolean;
+}
