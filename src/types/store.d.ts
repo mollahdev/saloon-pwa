@@ -15,4 +15,4 @@ export type LoginFormData = {
 
 export type CoreState = {
     isOnline: boolean;
-}
+};

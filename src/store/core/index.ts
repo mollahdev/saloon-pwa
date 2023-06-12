@@ -12,8 +12,8 @@ const initialState = {
     isOnline: true,
 };
 
-const coreSlice = createSlice({
-    name: 'coreSlice',
+const core = createSlice({
+    name: 'core',
     initialState: initialState as CoreState,
     reducers: {
         setOnline(state, action: PayloadAction<CoreState['isOnline']>) {
@@ -23,5 +23,5 @@ const coreSlice = createSlice({
     },
 });
 
-export const coreSliceActions = coreSlice.actions;
-export default coreSlice.reducer;
+export const coreActions = core.actions;
+export default core.reducer;

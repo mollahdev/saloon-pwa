@@ -11,8 +11,8 @@ import { RootState } from '@/store';
 
 const initialState = {};
 
-const currentUserSlice = createSlice({
-    name: 'currentUserSlice',
+const currentUser = createSlice({
+    name: 'currentUser',
     initialState: initialState as CurrentUserState,
     reducers: {
         setUser(state, action: PayloadAction<CurrentUserState>) {
@@ -30,5 +30,5 @@ export const isLoggedIn = (state: RootState): boolean => {
     return currentUser.status && currentUser.status === 'active';
 };
 
-export const currentUserActions = currentUserSlice.actions;
-export default currentUserSlice.reducer;
+export const currentUserActions = currentUser.actions;
+export default currentUser.reducer;

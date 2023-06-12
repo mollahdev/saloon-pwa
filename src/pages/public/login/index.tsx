@@ -22,8 +22,8 @@ import { LoginFormData } from '@/types/store';
 const LoginForom = () => {
     const [errors, setErrors] = useState<LoginFormData | null>(null);
     const [loading, setLoading] = useState(false);
-    const errorAction = useActionData() as LoginFormData;
     const { state } = useNavigation();
+    const errorAction = useActionData() as LoginFormData;
 
     useEffect(() => {
         if (errorAction) {
@@ -123,11 +123,11 @@ export default function Login() {
     };
     const isValid = useSelector(isLoggedIn);
     return (
-        <Suspense fallback={<p>Loading...</p>}>
+        <Suspense fallback={<p className='text-white'>Loading...</p>}>
             <Await
                 resolve={data.currentUser}
                 children={() =>
-                    isValid ? <Navigate replace to="/admin" /> : <LoginForom />
+                    isValid ? <Navigate replace to="/admin/overview" /> : <LoginForom />
                 }
             />
         </Suspense>

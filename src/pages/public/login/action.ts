@@ -1,50 +1,60 @@
+/**
+ * External dependencies
+ */
 import { isEmpty } from 'lodash';
 import { doAction } from '@mollahdev/hooks-js';
+import Cookies from 'js-cookie';
+import { redirect } from 'react-router-dom';
+/**
+ * Internal dependencies
+ */
+import store from '@/store';
+import { userApi } from '@/store/user/api';
+
+const { VITE_ADMIN_AUTH_TOKEN } = import.meta.env;
 
 type RequestData = {
     formData: () => FormData;
 };
 
-const fetch = () =>
-    new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(true);
-        }, 500);
-    });
-
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
 export default async function loginAction({ request }) {
     const req = request as RequestData;
-
     const formData = await req.formData();
-    const error: Record<string, string> = {};
-    const email = formData.get('email');
-    const password = formData.get('password');
+    const e: Record<string, string> = {};
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
 
-    // if (isEmpty(email)) {
-    // }
-    // error['email'] = 'Email is required';
-    // error['password'] = 'Password is required';
-
-    // if (isEmpty(password)) {
-    // }
-
-    doAction('notification', {
-        title: "Wonderful!",
-        message: "teodosii@react-notifications-component",
-        type: "danger",
-        container: 'top-right',    
-    })
-
-    error['notification'] = 'Email or password is incorrect';
-
-    const response = await fetch();
-    console.log(response);
-
-    if (!isEmpty(error)) {
-        return error;
+    if (isEmpty(email)) {
+        e['email'] = 'Email is required';
     }
 
-    return error;
+    if (isEmpty(password)) {
+        e['password'] = 'Password is required';
+    }
+
+    if (!isEmpty(e)) {
+        return e;
+    }
+
+    const { data, error } = (await store.dispatch(
+        userApi.endpoints.login.initiate({
+            email,
+            password,
+        })
+    )) as any;
+
+    if (!isEmpty(error) && isEmpty(data)) {
+        doAction('notification', {
+            title: 'Unauthorized!',
+            message: 'Could not verify email and password!',
+            type: 'danger',
+            container: 'top-right',
+        });
+        return null;
+    }
+
+    Cookies.set(VITE_ADMIN_AUTH_TOKEN, data.token);
+    return redirect('/admin/overview');
 }
