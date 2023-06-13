@@ -123,11 +123,15 @@ export default function Login() {
     };
     const isValid = useSelector(isLoggedIn);
     return (
-        <Suspense fallback={<p className='text-white'>Loading...</p>}>
+        <Suspense fallback={<p className="text-white">Loading...</p>}>
             <Await
                 resolve={data.currentUser}
                 children={() =>
-                    isValid ? <Navigate replace to="/admin/overview" /> : <LoginForom />
+                    isValid ? (
+                        <Navigate replace to="/admin/overview" />
+                    ) : (
+                        <LoginForom />
+                    )
                 }
             />
         </Suspense>

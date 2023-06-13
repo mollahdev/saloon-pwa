@@ -1,11 +1,14 @@
 import { User } from '@/types';
 
-export type CurrentUserState = Omit<
-    User,
-    'password' | 'recoveryCode' | 'recoveryToken'
->;
+type CurrentUser = Omit<User, 'password' | 'recoveryCode' | 'recoveryToken'>;
+
+export type CurrentUserState = {
+    user: CurrentUser;
+    token: string;
+};
+
 export type Core = {
-    isAppReady: boolean;
+    isOnline: boolean;
 };
 
 export type LoginFormData = {

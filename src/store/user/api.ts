@@ -6,8 +6,9 @@ import { User } from '@/types';
 export const userApi = createApi({
     reducerPath: 'userApi',
     baseQuery: apiBase,
+
     endpoints: (builder) => ({
-        getUserById: builder.query<CurrentUserState, string>({
+        getUserById: builder.query<CurrentUserState['user'], string>({
             query: (id) => `private/user/${id}`,
         }),
         login: builder.mutation<string, Pick<User, 'email' | 'password'>>({
