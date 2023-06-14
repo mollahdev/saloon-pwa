@@ -2,8 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@import './pages/dashboard';
+
 body {
-    @apply bg-dark-bg text-white;
+    &.public {
+        @apply bg-dark-bg text-white;
+    }
 }
 
 .bottom-nav {

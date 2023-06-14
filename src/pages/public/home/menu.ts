@@ -24,7 +24,7 @@ const menus = [
             'data-aos-delay': '200',
         },
         link: 'services',
-        theme: 'bg-white hover:bg-white-darken',
+        theme: 'bg-white text-dark-bg hover:bg-white-darken',
         title: 'Check our Services',
         icon: HaircutIcon,
     },

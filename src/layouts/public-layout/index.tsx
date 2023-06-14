@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { Outlet, NavLink } from 'react-router-dom';
+import { useEffect } from 'react';
 /**
  * Internal dependencies
  */
@@ -11,6 +12,13 @@ import StarIcon from '@/icons/star';
 import Profile from '@/icons/profile';
 
 export default function PublicLayout() {
+    useEffect(() => {
+        if (!document.body.classList.contains('public')) {
+            document.body.classList.add('public');
+            document.body.classList.remove('private');
+        }
+    }, []);
+
     return (
         <main className="text-white-text font-primary px-5 pt-10 pb-[100px] sm:pb-[150px] min-h-screen">
             <div className="container max-w-[700px] mx-auto">

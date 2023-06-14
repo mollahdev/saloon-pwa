@@ -5,7 +5,7 @@ export default function HaircutIcon(props: IconProps) {
         <svg
             {...props}
             xmlns="http://www.w3.org/2000/svg"
-            fill="#000"
+            fill="currentColor"
             version="1.1"
             viewBox="0 0 460.962 460.962"
             xmlSpace="preserve"

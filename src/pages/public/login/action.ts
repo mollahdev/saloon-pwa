@@ -76,6 +76,6 @@ export default async function loginAction({ request }) {
     }
 
     store.dispatch(currentUserActions.setUser(userData));
-    Cookies.set(VITE_ADMIN_AUTH_TOKEN, data.token);
+    Cookies.set(VITE_ADMIN_AUTH_TOKEN, data.token, { expires: 365 });
     return redirect('/admin/overview');
 }

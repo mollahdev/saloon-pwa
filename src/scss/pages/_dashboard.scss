@@ -1,0 +1,51 @@
+.dashboard {
+    --dashboard-height: 50px;
+    &__header {
+        @apply bg-dark-bg flex items-center justify-between text-white-text;
+        height: var(--dashboard-height);
+        padding: 10px 30px;
+        border-bottom: 1px solid #132f4c;
+    }
+
+    &__main {
+        height: calc(100vh - var(--dashboard-height));
+        display: grid;
+        grid-template-columns: 200px 1fr;
+    }
+
+    &__sidebar {
+        @apply text-white;
+        max-height: calc(100vh - var(--dashboard-height));
+        overflow-y: auto;
+        background-color: #0a1929;
+        border-right: 1px solid #132f4c;
+
+        a {
+            color: #b2bac2;
+
+            svg {
+                transition: color 0.3s;
+            }
+
+            &.active,
+            &:hover {
+                color: #66b2ff;
+                background-color: #132f4c;
+
+                svg {
+                    color: white;
+                }
+            }
+        }
+
+        a {
+            border-bottom: 1px solid #132f4c;
+        }
+    }
+
+    &__content {
+        max-height: calc(100vh - var(--dashboard-height));
+        overflow-y: auto;
+        background-color: #001e3c;
+    }
+}
